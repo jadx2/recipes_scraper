@@ -1,19 +1,22 @@
 require_relative "../lib/scraper_logic.rb"
+require_relative "../lib/styles.rb"
 
-puts "Welcome to Allrecipes web scraper"
-puts <<-HEREDOC
-  1.  Breakfast and Brunch | 2.  Lunch
-  3.  Dinners              | 4.  Appetizer and Snacks
-  5.  Breads               | 6.  Desserts
-  7.  Drinks               | 8.  Salads
-  9.  Side Dishes          | 10. Soups and Stews
-HEREDOC
-
+menu = Menu.new
 valid = false
 category = ""
 
+def clear
+  system "clear" or system "cls"
+end
+
+puts "#{COLOR_1}WELCOME TO ALLSPICE SCRAPER#{COLOR_END}"
+puts "#{COLOR_1}===========================#{COLOR_END}"
+puts "\n"
+puts menu.print_menu
+puts "\n"
+
 while !valid
-  puts "choose category:"
+  puts "Choose category number:"
   selection = gets.chomp.to_i
   case selection
   when 1
@@ -51,5 +54,5 @@ while !valid
   end
 end
 
-scraper = Scraper.new(category)
-scraper.recipe_info
+recipes = Recipes.new(category)
+recipes.print_recipe

@@ -1,52 +1,60 @@
 require "httparty"
 require "nokogiri"
+require_relative "./styles"
 
 class Scraper
   def initialize(category)
-    @category = category
-    @main_html = HTTParty.get("https://www.allrecipes.com/recipes/#{@category}")
-    @main_doc = Nokogiri::HTML(@main_html.body)
+    html = HTTParty.get("https://www.allrecipes.com/recipes/#{@category}")
+    @doc = Nokogiri::HTML(html.body)
   end
 
-  def recipes_links
-    @main_doc.css(".card__detailsContainer-left>.card__titleLink").map { |link| link["href"] }
-  end
-
-  def recipe_card
-    @recipe_html = HTTParty.get("#{link}")
-    @recipe_doc = Nokogiri::HTML(@recipe_html.body)
-  end
-
-  def recipes_grid(titles, ingredients, recipe_url)
-    @recipes = []
-    3.times do |i|
-      @recipes[i] = {
-        title: titles[i],
-        ingredients: ingredients[i],
-        recipe_url: recipe_url[i],
-      }
+  def print_recipe
+    @recipes.each do |recipe|
+      puts "#{COLOR_1}Recipe: #{recipe[:title]}#{COLOR_END}"
+      puts "\n"
+      puts "#{COLOR_2}Summary:#{COLOR_END} #{recipe[:description]}"
+      puts "#{COLOR_2}Reviews:#{COLOR_END} #{recipe[:review]}"
+      puts "#{COLOR_2}Recipe URL:#{COLOR_END} #{recipe[:recipes_url]}"
+      puts "#{COLOR_2}Author:#{COLOR_END} #{recipe[:author]}"
+      puts "-------------------------------------------------------"
     end
   end
 
-  def recipe_info
-    puts @recipe_doc
-    #@titles = @recipe_doc.css("h1").map { |h1| h1.content.strip }
-    #@ingredients = @recipe_doc.css(".ingredients-section>.ingredients-item>.checkbox-list>.checkbox-list-checkmark>.ingredients-item-name").map { |item| item.content.strip }
-    #@recipe_url = recipes_links
-    #recipes_grid(titles, ingredients, recipe_url)
-    #puts @titles
-    #puts @ingredients
-    #puts @recipe_url
+  def recipe_obj(titles, descriptions, recipes_url, reviews, authors)
+    @recipes = []
+    6.times do |i|
+      @recipes[i] = {
+        title: titles[i],
+        description: descriptions[i],
+        recipes_url: recipes_url[i],
+        review: reviews[i],
+        author: authors[i],
+      }
+    end
   end
+end
 
-  #def print_recipes
-  #  puts @titles
-  #  puts @ingredients
-  #  puts @recipe_url
-  #  @recipes.each do |recipe|
-  #    puts recipe[title]
-  #    puts recipe[ingredients]
-  #    puts recipe[recipe_url]
-  #  end
-  #end
+class Recipes < Scraper
+  def initialize(category)
+    @category = category
+    super
+    titles = @doc.css(".card__title").map { |title| title.content.strip }
+    descriptions = @doc.css(".card__summary").map { |summary| summary.content.strip }
+    recipes_url = @doc.css(".card__detailsContainer-left>.card__titleLink").map { |link| link["href"] }
+    reviews = @doc.css(".card__ratingCount").map { |review| review.content.strip }
+    authors = @doc.css(".card__authorName").map { |author| author.content.strip }
+    recipe_obj(titles, descriptions, recipes_url, reviews, authors)
+  end
+end
+
+class Menu
+  def print_menu
+    <<-HEREDOC
+    #{COLOR_2}1.#{COLOR_END}  Breakfast and Brunch | #{COLOR_2}2. #{COLOR_END} Lunch
+    #{COLOR_2}3.#{COLOR_END}  Dinners              | #{COLOR_2}4. #{COLOR_END} Appetizer and Snacks
+    #{COLOR_2}5.#{COLOR_END}  Breads               | #{COLOR_2}6. #{COLOR_END} Desserts
+    #{COLOR_2}7.#{COLOR_END}  Drinks               | #{COLOR_2}8. #{COLOR_END} Salads
+    #{COLOR_2}9.#{COLOR_END}  Side Dishes          | #{COLOR_2}10.#{COLOR_END} Soups and Stews
+    HEREDOC
+  end
 end
