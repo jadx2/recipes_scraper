@@ -1,9 +1,3 @@
-# frozen_string_literal: true
-
-# rubocop:disable Metrics/AbcSize
-# rubocop:disable Style/Documentation
-# rubocop:disable Metrics/MethodLength
-#
 require 'httparty'
 require 'nokogiri'
 require_relative './styles'
@@ -65,7 +59,3 @@ class Menu
     HEREDOC
   end
 end
-
-# rubocop:enable Metrics/AbcSize
-# rubocop:enable Style/Documentation
-# rubocop:enable Metrics/MethodLength
