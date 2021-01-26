@@ -1,7 +1,8 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-gem 'rubocop', '~>0.81.0'
+source 'https://rubygems.org'
+
+gem 'circular_queue'
 gem 'httparty'
 gem 'nokogiri'
-gem 'byebug'
-
+gem 'rubocop', '~>0.81.0'

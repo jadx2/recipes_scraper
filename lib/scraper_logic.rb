@@ -1,34 +1,41 @@
-require "httparty"
-require "nokogiri"
-require_relative "./styles"
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Style/Documentation
+# rubocop:disable Metrics/MethodLength
+#
+require 'httparty'
+require 'nokogiri'
+require_relative './styles'
 
 class Scraper
-  def initialize(category)
+  def initialize(_category)
     html = HTTParty.get("https://www.allrecipes.com/recipes/#{@category}")
     @doc = Nokogiri::HTML(html.body)
   end
 
   def print_recipe
     @recipes.each do |recipe|
-      puts "#{COLOR_1}Recipe: #{recipe[:title]}#{COLOR_END}"
+      puts "#{COLOR_1}Recipe #{recipe[:index] + 1}: #{recipe[:title]}#{COLOR_END}"
       puts "\n"
       puts "#{COLOR_2}Summary:#{COLOR_END} #{recipe[:description]}"
       puts "#{COLOR_2}Reviews:#{COLOR_END} #{recipe[:review]}"
       puts "#{COLOR_2}Recipe URL:#{COLOR_END} #{recipe[:recipes_url]}"
       puts "#{COLOR_2}Author:#{COLOR_END} #{recipe[:author]}"
-      puts "-------------------------------------------------------"
+      puts '-------------------------------------------------------'
     end
   end
 
   def recipe_obj(titles, descriptions, recipes_url, reviews, authors)
     @recipes = []
-    6.times do |i|
+    7.times do |i|
       @recipes[i] = {
+        index: i,
         title: titles[i],
         description: descriptions[i],
         recipes_url: recipes_url[i],
         review: reviews[i],
-        author: authors[i],
+        author: authors[i]
       }
     end
   end
@@ -38,11 +45,11 @@ class Recipes < Scraper
   def initialize(category)
     @category = category
     super
-    titles = @doc.css(".card__title").map { |title| title.content.strip }
-    descriptions = @doc.css(".card__summary").map { |summary| summary.content.strip }
-    recipes_url = @doc.css(".card__detailsContainer-left>.card__titleLink").map { |link| link["href"] }
-    reviews = @doc.css(".card__ratingCount").map { |review| review.content.strip }
-    authors = @doc.css(".card__authorName").map { |author| author.content.strip }
+    titles = @doc.css('.card__title').map { |title| title.content.strip }
+    descriptions = @doc.css('.card__summary').map { |summary| summary.content.strip }
+    recipes_url = @doc.css('.card__detailsContainer-left>.card__titleLink').map { |link| link['href'] }
+    reviews = @doc.css('.card__ratingCount').map { |review| review.content.strip }
+    authors = @doc.css('.card__authorName').map { |author| author.content.strip }
     recipe_obj(titles, descriptions, recipes_url, reviews, authors)
   end
 end
@@ -58,3 +65,7 @@ class Menu
     HEREDOC
   end
 end
+
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Style/Documentation
+# rubocop:enable Metrics/MethodLength
