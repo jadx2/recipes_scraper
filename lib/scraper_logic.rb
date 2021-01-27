@@ -31,7 +31,7 @@ class Scraper
         description: descriptions[i],
         recipes_url: recipes_url[i],
         review: reviews[i],
-        author: authors[i],
+        author: authors[i]
       }
     end
   end
