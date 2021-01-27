@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/scraper_logic"
-require_relative "../lib/menu"
-require_relative "../lib/recipes.rb"
-require_relative "../lib/styles"
+require_relative '../lib/scraper_logic'
+require_relative '../lib/menu'
+require_relative '../lib/recipes.rb'
+require_relative '../lib/styles'
 
 def clear
-  system "clear" or system "cls"
+  system 'clear' or system 'cls'
 end
 
 clear
@@ -18,9 +18,9 @@ puts "\n"
 def menu_options
   menu = Menu.new
   valid = false
-  category = ""
+  category = ''
   until valid
-    puts "Choose category number:"
+    puts 'Choose category number:'
     puts "\n"
     puts menu.print_menu
     selection = gets.chomp.to_i
@@ -29,7 +29,7 @@ def menu_options
       category = menu.links[selection - 1]
       valid = true
     else
-      puts "Category not found!"
+      puts 'Category not found!'
     end
   end
   category
@@ -40,7 +40,7 @@ def find_recipes
   recipes.print_recipe
   puts "#{COLOR_DANGER_BG}Press 'Q' to quit or any key to go to the menu:#{COLOR_END}"
 
-  if gets.chomp.upcase == "Q"
+  if gets.chomp.upcase == 'Q'
     clear && exit
   else
     clear
