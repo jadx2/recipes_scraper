@@ -20,7 +20,7 @@ def menu_options
   menu = Menu.new
   valid = false
   category = ''
-  until valid
+  while !valid
     puts 'Choose category number:'
     puts "\n"
     menu.print_menu
