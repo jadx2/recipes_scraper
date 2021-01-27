@@ -35,7 +35,7 @@ def menu_options
   until valid
     puts 'Choose category number:'
     puts "\n"
-    menu.print_menu
+    puts menu.print_menu
     selection = gets.chomp.to_i
     puts "\n"
     if validator(selection)
