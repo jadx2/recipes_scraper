@@ -47,20 +47,14 @@ bundle install
 - In the project's root directory execute the 'recipes' command:
 
 ```
-recipes
+bin/recipes
 ```
 
 - Follow the steps in the screen to get your recipes
 
 ### Run tests
 
-- Install Rspec:
-
-```
-gem install Rspec
-```
-
-- Run the Rspec command in the project's root directory:
+Run the Rspec command in the project's root directory:
 
 ```
 rspec
@@ -68,7 +62,7 @@ rspec
 
 ## Author
 
-👨‍💻 **Breno Xavier**
+👨‍💻 **Jaim Delmar**
 
 - Github: [@jadx2](https://github.com/jadx2/)
 - Twitter: [@bash0zen](https://twitter.com/bash0zen)
@@ -88,4 +82,3 @@ Give a ⭐️ if you like this project!
 
 - Microverse
 - [Allrecipes](https://www.allrecipes.com/)
-

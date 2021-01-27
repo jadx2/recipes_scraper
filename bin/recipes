@@ -1,9 +1,7 @@
 #!/usr/bin/env ruby
-# rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/MethodLength
 
 require_relative '../lib/scraper_logic'
+require_relative '../lib/menu'
 require_relative '../lib/styles'
 
 def clear
@@ -17,6 +15,7 @@ puts "#{COLOR_1}===========================#{COLOR_END}"
 puts "\n"
 
 def menu_options
+  links = ['78/breakfast-and-brunch/', '17561/lunch/', '17562/dinner/', '76/appetizers-and-snacks/', '156/bread/', '79/desserts/', '77/drinks/', '96/salad/', '81/side-dish/', '94/soups-stews-and-chili/']
   menu = Menu.new
   valid = false
   category = ''
@@ -28,44 +27,44 @@ def menu_options
     puts "\n"
     case selection
     when 1
-      category = '78/breakfast-and-brunch/'
+      category = links[0] 
       valid = true
     when 2
-      category = '17561/lunch/'
+      category = links[1]
       valid = true
     when 3
-      category = '17562/dinner/'
+      category = links[2]
       valid = true
     when 4
-      category = '76/appetizers-and-snacks/'
+      category = links[3]
       valid = true
     when 5
-      category = '156/bread/'
+      category = links[4]
       valid = true
     when 6
-      category = '79/desserts/'
+      category = links[5]
       valid = true
     when 7
-      category = '77/drinks/'
+      category = links[6]
       valid = true
     when 8
-      category = '96/salad/'
+      category = links[7]
       valid = true
     when 9
-      category = '81/side-dish/'
+      category = links[8]
       valid = true
     when 10
-      category = '94/soups-stews-and-chili/'
+      category = links[9]
       valid = true
     else
-      puts 'Category not found!'
+      puts "Category not found!"
     end
   end
   recipes = Recipes.new(category)
   recipes.print_recipe
   puts "#{COLOR_DANGER_BG}Press 'Q' to quit or any key to go to the menu:#{COLOR_END}"
 
-  if gets.chomp.upcase == 'Q'
+  if gets.chomp.upcase == "Q"
     clear && exit
   else
     clear
@@ -74,7 +73,3 @@ def menu_options
 end
 
 menu_options
-
-# rubocop:enable Metrics/PerceivedComplexity
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/MethodLength
