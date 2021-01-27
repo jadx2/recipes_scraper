@@ -10,4 +10,17 @@ class Menu
     #{COLOR_2}9.#{COLOR_END}  Side Dishes          | #{COLOR_2}10.#{COLOR_END} Soups and Stews
     HEREDOC
   end
+
+  def links
+    ["78/breakfast-and-brunch/", "17561/lunch/", "17562/dinner/", "76/appetizers-and-snacks/", "156/bread/",
+     "79/desserts/", "77/drinks/", "96/salad/", "81/side-dish/", "94/soups-stews-and-chili/"]
+  end
+
+  def validator(selection)
+    if selection.is_a?(Numeric) && selection.between?(1, 10)
+      true
+    else
+      false
+    end
+  end
 end
