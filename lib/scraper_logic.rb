@@ -1,6 +1,6 @@
-require "httparty"
-require "nokogiri"
-require_relative "./styles"
+require 'httparty'
+require 'nokogiri'
+require_relative './styles'
 
 class Scraper
   def initialize(_category)
@@ -16,7 +16,7 @@ class Scraper
       puts "#{COLOR_2}Reviews:#{COLOR_END} #{recipe[:review]}"
       puts "#{COLOR_2}Recipe URL:#{COLOR_END} #{recipe[:recipes_url]}"
       puts "#{COLOR_2}Author:#{COLOR_END} #{recipe[:author]}"
-      puts "-------------------------------------------------------"
+      puts '-------------------------------------------------------'
     end
   end
 
@@ -31,7 +31,7 @@ class Scraper
         description: descriptions[i],
         recipes_url: recipes_url[i],
         review: reviews[i],
-        author: authors[i],
+        author: authors[i]
       }
     end
   end
