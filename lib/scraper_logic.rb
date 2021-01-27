@@ -4,7 +4,7 @@ require_relative './styles'
 
 class Scraper
   def initialize(_category)
-    html = HTTParty.get('https://www.allrecipes.com/recipes/#{@category}')
+    html = HTTParty.get("https://www.allrecipes.com/recipes/#{@category}")
     @doc = Nokogiri::HTML(html.body)
   end
 
