@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/recipes_scraper_spec.rb
 require_relative '../lib/scraper_logic'
 

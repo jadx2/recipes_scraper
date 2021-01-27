@@ -15,7 +15,8 @@ puts "#{COLOR_1}===========================#{COLOR_END}"
 puts "\n"
 
 def menu_options
-  links = ['78/breakfast-and-brunch/', '17561/lunch/', '17562/dinner/', '76/appetizers-and-snacks/', '156/bread/', '79/desserts/', '77/drinks/', '96/salad/', '81/side-dish/', '94/soups-stews-and-chili/']
+  links = ['78/breakfast-and-brunch/', '17561/lunch/', '17562/dinner/', '76/appetizers-and-snacks/', '156/bread/',
+           '79/desserts/', '77/drinks/', '96/salad/', '81/side-dish/', '94/soups-stews-and-chili/']
   menu = Menu.new
   valid = false
   category = ''
@@ -25,19 +26,19 @@ def menu_options
     puts menu.print_menu
     selection = gets.chomp.to_i
     puts "\n"
-    if selection.is_a?(Numeric) && selection.between?(1,10)
-      category = links[selection -1]
+    if selection.is_a?(Numeric) && selection.between?(1, 10)
+      category = links[selection - 1]
       valid = true
     else
       puts 'Category not found!'
     end
   end
-  
+
   recipes = Recipes.new(category)
   recipes.print_recipe
   puts "#{COLOR_DANGER_BG}Press 'Q' to quit or any key to go to the menu:#{COLOR_END}"
 
-  if gets.chomp.upcase == "Q"
+  if gets.chomp.upcase == 'Q'
     clear && exit
   else
     clear
