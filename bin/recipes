@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require_relative '../lib/scraper_logic'
 require_relative '../lib/menu'
@@ -23,7 +24,7 @@ def menu_options
   until valid
     puts 'Choose category number:'
     puts "\n"
-    puts menu.print_menu
+    menu.print_menu
     selection = gets.chomp.to_i
     puts "\n"
     if selection.is_a?(Numeric) && selection.between?(1, 10)

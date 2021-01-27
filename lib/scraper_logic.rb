@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "httparty"
 require "nokogiri"
 require_relative "./styles"
@@ -19,6 +21,8 @@ class Scraper
       puts "-------------------------------------------------------"
     end
   end
+
+  private
 
   def recipe_obj(titles, descriptions, recipes_url, reviews, authors)
     @recipes = []
