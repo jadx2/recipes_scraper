@@ -16,7 +16,7 @@ class Scraper
       puts "#{COLOR_2}Reviews:#{COLOR_END} #{recipe[:review]}"
       puts "#{COLOR_2}Recipe URL:#{COLOR_END} #{recipe[:recipes_url]}"
       puts "#{COLOR_2}Author:#{COLOR_END} #{recipe[:author]}"
-      puts "-------------------------------------------------------"
+      puts '-------------------------------------------------------'
     end
   end
 
