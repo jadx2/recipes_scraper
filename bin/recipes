@@ -14,27 +14,39 @@ puts "#{COLOR_1}WELCOME TO ALLSPICE SCRAPER#{COLOR_END}"
 puts "#{COLOR_1}===========================#{COLOR_END}"
 puts "\n"
 
+def links
+   ['78/breakfast-and-brunch/', '17561/lunch/', '17562/dinner/', '76/appetizers-and-snacks/', '156/bread/',
+    '79/desserts/', '77/drinks/', '96/salad/', '81/side-dish/', '94/soups-stews-and-chili/']
+end
+
+def validator(selection)
+  if selection.is_a?(Numeric) && selection.between?(1, 10)
+    true
+  else
+    puts 'Category not found!'
+  end
+end
+
 def menu_options
-  links = ['78/breakfast-and-brunch/', '17561/lunch/', '17562/dinner/', '76/appetizers-and-snacks/', '156/bread/',
-           '79/desserts/', '77/drinks/', '96/salad/', '81/side-dish/', '94/soups-stews-and-chili/']
   menu = Menu.new
   valid = false
   category = ''
-  while !valid
+  until valid
     puts 'Choose category number:'
     puts "\n"
     menu.print_menu
     selection = gets.chomp.to_i
     puts "\n"
-    if selection.is_a?(Numeric) && selection.between?(1, 10)
+    if validator(selection)
       category = links[selection - 1]
       valid = true
-    else
-      puts 'Category not found!'
     end
   end
+  category
+end
 
-  recipes = Recipes.new(category)
+def get_recipes
+  recipes = Recipes.new(menu_options)
   recipes.print_recipe
   puts "#{COLOR_DANGER_BG}Press 'Q' to quit or any key to go to the menu:#{COLOR_END}"
 
@@ -42,8 +54,8 @@ def menu_options
     clear && exit
   else
     clear
-    menu_options
+    get_recipes
   end
 end
 
-menu_options
+get_recipes
