@@ -1,4 +1,4 @@
-require_relative "./styles"
+require_relative './styles'
 
 class Menu
   def print_menu
