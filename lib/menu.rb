@@ -12,8 +12,8 @@ class Menu
   end
 
   def links
-    ["78/breakfast-and-brunch/", "17561/lunch/", "17562/dinner/", "76/appetizers-and-snacks/", "156/bread/",
-     "79/desserts/", "77/drinks/", "96/salad/", "81/side-dish/", "94/soups-stews-and-chili/"]
+    ['78/breakfast-and-brunch/', '17561/lunch/', '17562/dinner/', '76/appetizers-and-snacks/', '156/bread/',
+     '79/desserts/', '77/drinks/', '96/salad/', '81/side-dish/', '94/soups-stews-and-chili/']
   end
 
   def validator(selection)
