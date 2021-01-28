@@ -37,14 +37,14 @@ end
 
 def print_recipe(recipes)
   recipes.recipes_holder.each do |recipe|
-       puts "#{COLOR_1}Recipe #{recipe[:index] + 1}: #{recipe[:title]}#{COLOR_END}"
-       puts "\n"
-       puts "#{COLOR_2}Summary:#{COLOR_END} #{recipe[:description]}"
-       puts "#{COLOR_2}Reviews:#{COLOR_END} #{recipe[:review]}"
-       puts "#{COLOR_2}Recipe URL:#{COLOR_END} #{recipe[:recipes_url]}"
-       puts "#{COLOR_2}Author:#{COLOR_END} #{recipe[:author]}"
-       puts '-------------------------------------------------------'
-     end
+    puts "#{COLOR_1}Recipe #{recipe[:index] + 1}: #{recipe[:title]}#{COLOR_END}"
+    puts "\n"
+    puts "#{COLOR_2}Summary:#{COLOR_END} #{recipe[:description]}"
+    puts "#{COLOR_2}Reviews:#{COLOR_END} #{recipe[:review]}"
+    puts "#{COLOR_2}Recipe URL:#{COLOR_END} #{recipe[:recipes_url]}"
+    puts "#{COLOR_2}Author:#{COLOR_END} #{recipe[:author]}"
+    puts '-------------------------------------------------------'
+  end
 end
 
 def find_recipes
