@@ -65,7 +65,7 @@ rspec
 👨‍💻 **Jaim Delmar**
 
 - Github: [@jadx2](https://github.com/jadx2/)
-- Twitter: [@bash0zen](https://twitter.com/bash0zen)
+- Twitter: [@thecatcodes](https://twitter.com/thecatcodes)
 - LinkedIn: [@Jaim Delmar](https://www.linkedin.com/in/jaim-delmar-3a45311b9/)
 
 ## 🤝 Contributing
