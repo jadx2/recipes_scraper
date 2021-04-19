@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/scraper_logic'
+require_relative '../lib/menu'
+require_relative '../lib/recipes.rb'
+require_relative '../lib/styles'
+
+def clear
+  system 'clear' or system 'cls'
+end
+
+clear
+
+puts "#{COLOR_1}WELCOME TO ALLRECIPES SCRAPER#{COLOR_END}"
+puts "#{COLOR_1}===========================#{COLOR_END}"
+puts "\n"
+
+def menu_options
+  menu = Menu.new
+  valid = false
+  category = ''
+  until valid
+    puts 'Choose category number:'
+    puts "\n"
+    puts menu.print_menu
+    selection = gets.chomp.to_i
+    puts "\n"
+    if menu.validator(selection)
+      category = menu.links[selection - 1]
+      valid = true
+    else
+      puts 'Category not found!'
+    end
+  end
+  category
+end
+
+def print_recipe(recipes)
+  recipes.recipes_holder.each do |recipe|
+    puts "#{COLOR_1}Recipe #{recipe[:index] + 1}: #{recipe[:title]}#{COLOR_END}"
+    puts "\n"
+    puts "#{COLOR_2}Summary:#{COLOR_END} #{recipe[:description]}"
+    puts "#{COLOR_2}Reviews:#{COLOR_END} #{recipe[:review]}"
+    puts "#{COLOR_2}Recipe URL:#{COLOR_END} #{recipe[:recipes_url]}"
+    puts "#{COLOR_2}Author:#{COLOR_END} #{recipe[:author]}"
+    puts '-------------------------------------------------------'
+  end
+end
+
+def find_recipes
+  recipes = Recipes.new(menu_options)
+  print_recipe(recipes)
+  puts "#{COLOR_DANGER_BG}Press 'Q' to quit or any key to go to the menu:#{COLOR_END}"
+
+  if gets.chomp.upcase == 'Q'
+    clear && exit
+  else
+    clear
+    find_recipes
+  end
+end
+
+find_recipes
